@@ -44,7 +44,23 @@ body {
 }
 
 audio {
-    width: 100%;
+    display: none; /* hide default controls since we use custom button */
+}
+
+.play-button {
+    margin-top: 15px;
+    padding: 10px 25px;
+    font-size: 16px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.play-button:hover {
+    background-color: #1ed760;
 }
 
 .heart {
@@ -58,16 +74,37 @@ audio {
 <body>
 
 <div class="player">
-    <img src="IMG_1060.jpeg" class="album-art">
+    <img src="IMG_1060.jpeg" class="album-art" alt="Album Art">
     <div class="song-title">For A Really Good Mood</div>
     <div class="artist">From Adam Oliver❤️</div>
-    <audio controls>
-        <source src="Paula message.m4a" type="audio/mpeg">
+
+    <!-- Hidden audio element -->
+    <audio id="audioPlayer">
+        <source src="Paula message.m4a" type="audio/mp4">
+        Your browser does not support the audio element.
     </audio>
+
+    <!-- Custom play button -->
+    <button class="play-button" id="playButton">Play Song</button>
+
     <div class="heart">💚</div>
 </div>
 
+<script>
+// Get references to audio and button
+const audio = document.getElementById('audioPlayer');
+const button = document.getElementById('playButton');
+
+button.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        button.textContent = 'Pause Song';
+    } else {
+        audio.pause();
+        button.textContent = 'Play Song';
+    }
+});
+</script>
+
 </body>
-
 </html>
-
